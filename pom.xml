@@ -2,12 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	<!--
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
+	-->
 
 	<name>products</name>
 	<description>Trade Products</description>
@@ -15,25 +18,50 @@
 	<groupId>com.eightbits.commerce.trade</groupId>
 	<artifactId>products</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
 	<properties>
 		<java.version>17</java.version>
+
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+
+		<spring-boot.version>3.2.3</spring-boot.version>
+		<spring-cloud.version>2023.0.0</spring-cloud.version>
+
+		<spring-boot-maven-plugin.version>${spring-boot.version}</spring-boot-maven-plugin.version>
+
+		<mapstruct.version>1.5.5.Final</mapstruct.version>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
+	<modules>
+		<module>web</module>
+	</modules>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct</artifactId>
+				<version>${mapstruct.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -57,11 +85,29 @@
 	</dependencies>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring-boot-maven-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>repackage</id>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<skip>true</skip>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -72,5 +118,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
