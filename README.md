@@ -1,1 +1,1 @@
-# product-java
+# Product Microservice
