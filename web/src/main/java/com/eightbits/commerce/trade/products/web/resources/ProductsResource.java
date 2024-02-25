@@ -3,6 +3,7 @@ package com.eightbits.commerce.trade.products.web.resources;
 import com.eightbits.commerce.trade.products.generated.v1.api.ProductsApi;
 import com.eightbits.commerce.trade.products.generated.v1.model.Product;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
@@ -11,6 +12,7 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/v1")
 public class ProductsResource implements ProductsApi {
     @Override
     public Mono<ResponseEntity<Product>> findProductById(UUID id, ServerWebExchange exchange) {
