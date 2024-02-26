@@ -122,6 +122,8 @@
 								<delegatePattern>false</delegatePattern>
 								<interfaceOnly>true</interfaceOnly>
 								<sourceFolder>openapi-generator</sourceFolder>
+								<skipDefaultInterface>true</skipDefaultInterface>
+								<useResponseEntity>true</useResponseEntity>
 
 								<useBeanValidation>true</useBeanValidation>
 								<dateLibrary>java8</dateLibrary>
