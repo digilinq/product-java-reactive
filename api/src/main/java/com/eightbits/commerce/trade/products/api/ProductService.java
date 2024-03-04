@@ -13,5 +13,5 @@ public interface ProductService {
 
     Mono<Product> findByProductId(UUID productId);
 
-    void save(Product product);
+    Mono<Product> save(Product product);
 }

@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void save(Product product) {
-        repository.save(mapper.map(product)).map(mapper::map);
+    public Mono<Product> save(Product product) {
+        return repository.save(mapper.map(product)).map(mapper::map);
     }
 }
